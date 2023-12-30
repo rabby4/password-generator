@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import './App.css'
+import toast, { Toaster } from 'react-hot-toast'
 
 function App() {
   const [passLength, setPassLength] = useState(8)
@@ -24,7 +25,9 @@ function App() {
   }, [passLength, addNumber, addCar, setPassword])
 
   const handleCopy = useCallback(() => {
+    passRef.current?.select()
     window.navigator.clipboard.writeText(password)
+    toast.success('Successfully copy the password')
   }, [password])
 
   useEffect(() => {
@@ -56,6 +59,7 @@ function App() {
           </div>
         </div>
       </div>
+      <Toaster />
     </>
   )
 }
